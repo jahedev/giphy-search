@@ -1,25 +1,51 @@
-import logo from './logo.svg';
+import React from 'react';
+import axios from 'axios';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const api_key = 'Tcvfb5T203klYiuSxcutNyJy7qnIzLmT';
+const search_query = 'basketball';
+const api_str = `http://api.giphy.com/v1/gifs/search?q=${search_query}&api_key=${api_key}`;
+
+let x = 0;
+
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      gifs: [],
+      urls: [],
+    };
+  }
+
+  componentDidMount() {
+    axios.get(api_str).then((res) => {
+      this.setState({ gifs: res });
+    });
+
+    setTimeout(() => {
+      let data = this.state.gifs.data.data;
+      let urls = [];
+      for (const key in data) {
+        const url = data[key].images['downsized'].url;
+        this.state.urls.push(url);
+        this.setState({ urls: urls });
+      }
+    }, 1000);
+  }
+
+  render() {
+    return (
+      <div className='App'>
+        <ul>
+          {this.state.urls.map((src) => (
+            <li>
+              <img key={++x} src={src} />
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  }
 }
 
 export default App;

@@ -1,10 +1,12 @@
 import React from 'react';
 import axios from 'axios';
+import GifCard from './GifCard';
 import './App.css';
 
 const api_key = 'Tcvfb5T203klYiuSxcutNyJy7qnIzLmT';
-const search_query = 'basketball';
-const api_str = `http://api.giphy.com/v1/gifs/search?q=${search_query}&api_key=${api_key}`;
+// const search_query = 'big+chungus';
+// const api_str = `http://api.giphy.com/v1/gifs/search?q=${search_query}&api_key=${api_key}`;
+const api_str = `http://api.giphy.com/v1/gifs/search?q=`;
 
 let x = 0;
 
@@ -14,11 +16,17 @@ class App extends React.Component {
     this.state = {
       gifs: [],
       urls: [],
+      query: 'search',
     };
+
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
-    axios.get(api_str).then((res) => {
+    const query = this.state.query.split(' ').join('+');
+    const api_link = `${api_str}${query}&api_key=${api_key}`;
+    console.log('API LINK: ', api_link);
+    axios.get(api_link).then((res) => {
       this.setState({ gifs: res });
     });
 
@@ -33,13 +41,51 @@ class App extends React.Component {
     }, 1000);
   }
 
+  search() {
+    const api_link = `${api_str}${this.state.query}&${api_key}`;
+    console.log('API LINK: ', api_link);
+    axios.get(api_link).then((res) => {
+      this.setState({ gifs: res });
+    });
+
+    setTimeout(() => {
+      let data = this.state.gifs.data.data;
+      let urls = [];
+      for (const key in data) {
+        const url = data[key].images['downsized'].url;
+        this.state.urls.push(url);
+        this.setState({ urls: urls });
+      }
+    }, 1000);
+  }
+
+  handleChange(e) {
+    this.setState({
+      query: e.target.value,
+    });
+  }
+
   render() {
+    x = 0;
     return (
       <div className='App'>
+        <div className='search-container'>
+          <h1>Search for GIFs</h1>
+          <span className='label'>Search:&nbsp;</span>
+          <input
+            name='searchinput'
+            placeholder='e.g. The Office'
+            onChange={this.handleChange}
+            onKeyPress={(e) => {
+              if (e.key === 'Enter') this.componentDidMount();
+            }}
+          />
+        </div>
         <ul>
           {this.state.urls.map((src) => (
             <li>
-              <img key={++x} src={src} />
+              {/* <img key={++x} src={src} /> */}
+              <GifCard imgsrc={src} />;
             </li>
           ))}
         </ul>

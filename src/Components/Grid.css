@@ -1,0 +1,58 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    padding: 5px;
+  }
+  .grid-item {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 5px;
+    font-size: 30px;
+    text-align: center;
+  }
+
+  #searchbar{
+      background-color: aquamarine;
+      height: 100px;
+      text-align: center;
+      padding-top: 35px;
+  }
+  #searchInput{
+      height: 30px;
+      width: 250px;
+      border-radius: 0.6em;
+      text-align: center;
+      border-color: black;
+      
+  }
+#searchButton{
+  height: 30px;
+  width: 90px;
+  margin-left: 10px;
+}
+.gifimage{
+    height: 150px;
+}
+.giftitle{
+    color: brown;
+    font-size: small;
+}
+#filter{
+    display: flex;
+    margin-top: 20px;
+}
+#increament{
+    flex: 1;
+    
+}
+#filterbutton{
+    flex: 1;
+    
+    display: flex;
+}
+#filterbutton button{
+    height: 35px;
+    width: 190px;
+    margin-left: 200px;
+    background-color: rgb(13, 143, 110);
+    border-radius: 5px;
+}

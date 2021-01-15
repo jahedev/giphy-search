@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import GifCard from './GifCard';
 import './App.css';
+import SearchField from './SearchField';
 
 const api_key = 'Tcvfb5T203klYiuSxcutNyJy7qnIzLmT';
 // const search_query = 'big+chungus';
@@ -66,6 +67,9 @@ class App extends React.Component {
               if (e.key === 'Enter') this.componentDidMount();
             }}
           />
+        </div>
+        <div>
+          <SearchField searchType='random' />
         </div>
         <ul>
           {this.state.gifs.map((src) => (

@@ -20,6 +20,7 @@ class App extends React.Component {
     };
 
     this.handleChange = this.handleChange.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
   }
 
   componentDidMount() {
@@ -44,7 +45,9 @@ class App extends React.Component {
     }, 1000);
   }
 
-  search() {}
+  handleSearch(type = 'search' /* || random || trending */) {
+    if (type !== 'random' || type !== 'trending') type = 'search';
+  }
 
   handleChange(e) {
     this.setState({

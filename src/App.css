@@ -1,38 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
+body {
+  margin: 0;
+  font-family: Lato, Arial, Helvetica, sans-serif sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 .App {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  padding: 5px;
+}
+.grid-item {
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 5px;
+  font-size: 30px;
+  text-align: center;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+#searchbar {
+  background-color: aquamarine;
+  height: 100px;
+  text-align: center;
+  padding-top: 35px;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+#searchInput {
+  height: 30px;
+  width: 250px;
+  border-radius: 0.6em;
+  text-align: center;
+  border-color: black;
+}
+#searchButton {
+  height: 30px;
+  width: 90px;
+  margin-left: 10px;
+}
+.gifimage {
+  height: 150px;
+}
+.giftitle {
+  color: brown;
+  font-size: small;
+}
+#filter {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  margin-top: 20px;
+}
+#increament {
+  flex: 1;
+}
+#filterbutton {
+  flex: 1;
+
+  display: flex;
+}
+#filterbutton button {
+  height: 35px;
+  width: 190px;
+  margin-left: 200px;
+  background-color: rgb(13, 143, 110);
+  border-radius: 5px;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+span {
+  font-family: Lato, Arial, Helvetica, sans-serif;
 }

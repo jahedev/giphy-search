@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import SearchField from './components/SearchField';
 import GifLayout from './components/GifLayout';
 
-class App extends Component {
+export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -35,10 +35,11 @@ class App extends Component {
           onGifsRequest={this.displayGIFS}
           changeGifNum={this.changeGifNum}
         />
+        <div className='showing-gif-num'>
+          <p>Showing Up To: {this.state.numOfGifs} GIFs</p>
+        </div>
         <GifLayout numOfGifs={this.state.numOfGifs} gifs={this.state.gifs} />
       </div>
     );
   }
 }
-
-export default App;

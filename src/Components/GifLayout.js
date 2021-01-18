@@ -10,7 +10,7 @@ export default class GifLayout extends Component {
     return (
       <div className='gif-layout'>
         {this.props.gifs.map((gif, i) =>
-          i <= numOfGifs ? (
+          i < numOfGifs ? (
             <GifCard key={i} title={gif.title} src={gif.url} />
           ) : (
             ''

@@ -123,7 +123,7 @@ class SearchField extends Component {
               </button>
             </div>
             <div id='increament'>
-              <span>Number Of Gifs</span>
+              <span>Show:&nbsp;</span>
               <button onClick={this.moreGIFS}>More</button>
               <button onClick={this.lessGIFS}>Less</button>
             </div>

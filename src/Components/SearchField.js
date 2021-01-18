@@ -13,13 +13,13 @@ const API = {
   KEY: 'sc71PXHt3BEJg208Ct4xBM6K5OTbJ4BT',
 
   get TRENDING() {
-    return `http://api.giphy.com/v1/gifs/trending?api_key=${this.KEY}`;
+    return `https://api.giphy.com/v1/gifs/trending?api_key=${this.KEY}`;
   },
   get RANDOM() {
-    return `http://api.giphy.com/v1/gifs/random?api_key=${this.KEY}`;
+    return `https://api.giphy.com/v1/gifs/random?api_key=${this.KEY}`;
   },
   get SEARCH_START() {
-    return 'http://api.giphy.com/v1/gifs/search?q=';
+    return 'https://api.giphy.com/v1/gifs/search?q=';
   },
   get SEARCH_END() {
     return `&api_key=${this.KEY}`;

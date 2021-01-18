@@ -13,7 +13,7 @@ export default class App extends Component {
     super(props);
     this.state = {
       gifs: [],
-      numOfGifs: 50,
+      numOfGifs: 25,
     };
 
     this.displayGIFS = this.displayGIFS.bind(this);

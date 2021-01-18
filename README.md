@@ -6,7 +6,7 @@
 
 For this group assignment, you will create a simple web application that does the following:
 
-1. Allow the user to enter any search term
+1. Allow the user to enter any search term.
 2. Fetch a list of results from the [GIPHY API](https://developers.giphy.com/docs/#technical-documentation)
 3. Allow the user to sort and filter based on as many parameters you'd like
 

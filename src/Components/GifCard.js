@@ -6,8 +6,9 @@ class GifCard extends Component {
   }
   render() {
     return (
-      <div class='grid-item'>
+      <div className='grid-item'>
         <img src={this.props.src} className='gifimage' />
+        <p className='giftitle'>{this.props.title}</p>
       </div>
     );
   }

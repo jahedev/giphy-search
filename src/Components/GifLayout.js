@@ -4,16 +4,18 @@ import GifCard from './GifCard';
 export default class GifLayout extends Component {
   constructor(props) {
     super(props);
-    // this.props.gifs
   }
   render() {
+    const numOfGifs = this.props.numOfGifs;
     return (
       <div className='gif-layout'>
-        {this.props.gifs.map((img_url, i) => (
-          <div>
-            <GifCard key={i} src={img_url} />
-          </div>
-        ))}
+        {this.props.gifs.map((gif, i) =>
+          i <= numOfGifs ? (
+            <GifCard key={i} title={gif.title} src={gif.url} />
+          ) : (
+            ''
+          )
+        )}
       </div>
     );
   }

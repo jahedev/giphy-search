@@ -12,6 +12,7 @@ import GifGard from './GifCard';
 
 const API = {
   KEY: 'sc71PXHt3BEJg208Ct4xBM6K5OTbJ4BT',
+
   get TRENDING() {
     return `http://api.giphy.com/v1/gifs/trending?api_key=${this.KEY}`;
   },
@@ -31,9 +32,8 @@ class SearchField extends Component {
     super(props);
     this.state = {
       gifs: [],
-      inputvalue: ' ',
-      numberGif: 1,
-      // this.props.displayGIFS
+      inputvalue: '',
+      numOfGif: 50,
     };
 
     this.searchGIFS = this.searchGIFS.bind(this);
@@ -41,44 +41,55 @@ class SearchField extends Component {
     this.trendingGIFS = this.trendingGIFS.bind(this);
     this.getGIFS = this.getGIFS.bind(this);
     this.searchInputChanged = this.searchInputChanged.bind(this);
+    this.moreGIFS = this.moreGIFS.bind(this);
+    this.lessGIFS = this.lessGIFS.bind(this);
+  }
+
+  async componentDidMount() {
+    this.trendingGIFS();
   }
 
   getGIFS = (URL) => {
     let gifs_obj;
 
     axios.get(URL).then((res) => {
-      gifs_obj = res;
-    });
-
-    setTimeout(() => {
-      let data = gifs_obj.data.data;
+      let data = res.data.data;
       let urls = [];
+
       for (const key in data) {
         const url = data[key].images['downsized'].url;
-        urls.push(url);
+        const title = data[key].title;
+        urls.push({ url: url, title: title });
       }
-      this.props.onClick(urls);
-    }, 1000);
+
+      this.props.onGifsRequest(urls);
+    });
   };
 
   searchGIFS = () => {
     const SEARCH_QUERY = this.state.inputvalue.trim();
-    console.log(SEARCH_QUERY);
     const API_SEARCH = API.SEARCH_START + SEARCH_QUERY + API.SEARCH_END;
     this.getGIFS(API_SEARCH);
   };
 
   randomGIFS = () => {
-    let img_url;
-
     axios.get(API.RANDOM).then((res) => {
-      img_url = res.data.data.images.downsized.url;
-      this.props.onClick([img_url]);
+      let url = res.data.data.images.downsized.url;
+      let title = res.data.data.title;
+      title = this.props.onGifsRequest([{ url: url, title: title }]);
     });
   };
 
   trendingGIFS = () => {
     this.getGIFS(API.TRENDING);
+  };
+
+  moreGIFS = () => {
+    this.props.changeGifNum(3);
+  };
+
+  lessGIFS = () => {
+    this.props.changeGifNum(-3);
   };
 
   searchInputChanged(e) {
@@ -99,15 +110,6 @@ class SearchField extends Component {
             onChange={this.searchInputChanged}
             id='searchInput'
           />
-
-          {/* <button
-            onClick={() =>
-              this.componentDidMount(
-                `http://api.giphy.com/v1/gifs/search?q=${this.state.inputvalue.trim()}&api_key=sc71PXHt3BEJg208Ct4xBM6K5OTbJ4BT`
-              )
-            }
-            id='searchButton'
-          > */}
           <button onClick={this.searchGIFS} id='searchButton'>
             <span>Search</span>
           </button>
@@ -122,22 +124,8 @@ class SearchField extends Component {
             </div>
             <div id='increament'>
               <span>Number Of Gifs</span>
-              <button
-                onClick={() => {
-                  if (this.state.numberGif < this.state.gifs.length)
-                    this.setState({ numberGif: this.state.numberGif + 1 });
-                }}
-              >
-                More
-              </button>
-              <button
-                onClick={() => {
-                  if (this.state.numberGif > 0)
-                    this.setState({ numberGif: this.state.numberGif - 1 });
-                }}
-              >
-                Less
-              </button>
+              <button onClick={this.moreGIFS}>More</button>
+              <button onClick={this.lessGIFS}>Less</button>
             </div>
           </div>
         </div>

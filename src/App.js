@@ -15,13 +15,13 @@ class App extends Component {
 
   displayGIFS = (gifs) => {
     this.setState({ gifs: gifs });
+    console.log(gifs);
   };
 
   render() {
     return (
       <div>
         <SearchField onClick={this.displayGIFS} />
-        <GifLayout />
       </div>
     );
   }

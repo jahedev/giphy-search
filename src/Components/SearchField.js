@@ -10,7 +10,21 @@ import '../App.css';
 import axios from 'axios';
 import GifGard from './GifCard';
 
-const API_URL = `http://api.giphy.com/v1/gifs/trending?api_key=sc71PXHt3BEJg208Ct4xBM6K5OTbJ4BT`;
+const API = {
+  KEY: 'sc71PXHt3BEJg208Ct4xBM6K5OTbJ4BT',
+  get TRENDING() {
+    return `http://api.giphy.com/v1/gifs/trending?api_key=${this.KEY}`;
+  },
+  get RANDOM() {
+    return `http://api.giphy.com/v1/gifs/random?api_key=${this.KEY}`;
+  },
+  get SEARCH_START() {
+    return 'http://api.giphy.com/v1/gifs/search?q=';
+  },
+  get SEARCH_END() {
+    return `&api_key=${this.KEY}`;
+  },
+};
 
 class SearchField extends Component {
   constructor(props) {
@@ -23,23 +37,49 @@ class SearchField extends Component {
     };
 
     this.searchGIFS = this.searchGIFS.bind(this);
-    this.randomGIFS = this.searchGIFS.bind(this);
-    this.trendingGIFS = this.searchGIFS.bind(this);
+    this.randomGIFS = this.randomGIFS.bind(this);
+    this.trendingGIFS = this.trendingGIFS.bind(this);
+    this.getGIFS = this.getGIFS.bind(this);
     this.searchInputChanged = this.searchInputChanged.bind(this);
   }
 
+  getGIFS = (URL) => {
+    let gifs_obj;
+
+    axios.get(URL).then((res) => {
+      gifs_obj = res;
+    });
+
+    setTimeout(() => {
+      let data = gifs_obj.data.data;
+      let urls = [];
+      for (const key in data) {
+        const url = data[key].images['original'].url;
+        urls.push(url);
+      }
+      this.props.onClick(urls);
+    }, 1000);
+  };
+
   searchGIFS = () => {
-    axios.get(API_URL).then((res) => {
-      let arr = [];
-      if (!Array.isArray(res.data.data)) {
-        arr.push(res.data.data);
-        this.setState({ gifs: arr });
-      } else this.props.onClick(res.data.data);
+    const SEARCH_QUERY = this.state.inputvalue.trim();
+    console.log(SEARCH_QUERY);
+    const API_SEARCH = API.SEARCH_START + SEARCH_QUERY + API.SEARCH_END;
+    this.getGIFS(API_SEARCH);
+  };
+
+  randomGIFS = () => {
+    let img_url;
+
+    axios.get(API.RANDOM).then((res) => {
+      img_url = res.data.data.images.original.url;
+      this.props.onClick([img_url]);
     });
   };
 
-  randomGIFS = () => {};
-  trendingGIFS = () => {};
+  trendingGIFS = () => {
+    this.getGIFS(API.TRENDING);
+  };
 
   searchInputChanged(e) {
     this.setState({

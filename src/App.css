@@ -11,7 +11,7 @@ body {
   text-align: center;
 }
 
-.grid-container {
+.gif-layout {
   display: grid;
   grid-template-columns: auto auto auto;
   padding: 5px;

@@ -22,6 +22,7 @@ class App extends Component {
     return (
       <div>
         <SearchField onClick={this.displayGIFS} />
+        <GifLayout gifs={this.state.gifs} />
       </div>
     );
   }

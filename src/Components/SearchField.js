@@ -54,7 +54,7 @@ class SearchField extends Component {
       let data = gifs_obj.data.data;
       let urls = [];
       for (const key in data) {
-        const url = data[key].images['original'].url;
+        const url = data[key].images['downsized'].url;
         urls.push(url);
       }
       this.props.onClick(urls);
@@ -72,7 +72,7 @@ class SearchField extends Component {
     let img_url;
 
     axios.get(API.RANDOM).then((res) => {
-      img_url = res.data.data.images.original.url;
+      img_url = res.data.data.images.downsized.url;
       this.props.onClick([img_url]);
     });
   };

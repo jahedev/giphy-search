@@ -1,3 +1,7 @@
+/*
+ * GifLayout Component is only reponsible for:
+ *   1.Taking gifs array and displaying them with GifCard
+ */
 import React, { Component } from 'react';
 import GifCard from './GifCard';
 

@@ -1,7 +1,12 @@
-//import './App.css';
+/*
+ * App Component is only reponsible for:
+ *   1. Working with SearchField and GifLayout
+ */
+
 import React, { Component } from 'react';
 import SearchField from './components/SearchField';
 import GifLayout from './components/GifLayout';
+import './App.css';
 
 export default class App extends Component {
   constructor(props) {
@@ -31,6 +36,7 @@ export default class App extends Component {
   render() {
     return (
       <div>
+        <h1>GIPHY API SEARCH APP</h1>
         <SearchField
           onGifsRequest={this.displayGIFS}
           changeGifNum={this.changeGifNum}

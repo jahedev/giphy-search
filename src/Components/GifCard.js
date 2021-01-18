@@ -1,3 +1,7 @@
+/*
+ * GifCard Component is only reponsible for:
+ *   1.Displaying an individual GIF
+ */
 import React, { Component } from 'react';
 
 class GifCard extends Component {

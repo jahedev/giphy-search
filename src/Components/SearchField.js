@@ -8,7 +8,6 @@
 import React, { Component } from 'react';
 import '../App.css';
 import axios from 'axios';
-import GifGard from './GifCard';
 
 const API = {
   KEY: 'sc71PXHt3BEJg208Ct4xBM6K5OTbJ4BT',
@@ -33,7 +32,6 @@ class SearchField extends Component {
     this.state = {
       gifs: [],
       inputvalue: '',
-      numOfGif: 50,
     };
 
     this.searchGIFS = this.searchGIFS.bind(this);
@@ -50,8 +48,6 @@ class SearchField extends Component {
   }
 
   getGIFS = (URL) => {
-    let gifs_obj;
-
     axios.get(URL).then((res) => {
       let data = res.data.data;
       let urls = [];
@@ -67,7 +63,7 @@ class SearchField extends Component {
   };
 
   searchGIFS = () => {
-    const SEARCH_QUERY = this.state.inputvalue.trim();
+    const SEARCH_QUERY = this.state.inputvalue.trim().split(' ').join('+');
     const API_SEARCH = API.SEARCH_START + SEARCH_QUERY + API.SEARCH_END;
     this.getGIFS(API_SEARCH);
   };
@@ -76,7 +72,7 @@ class SearchField extends Component {
     axios.get(API.RANDOM).then((res) => {
       let url = res.data.data.images.downsized.url;
       let title = res.data.data.title;
-      title = this.props.onGifsRequest([{ url: url, title: title }]);
+      this.props.onGifsRequest([{ url: url, title: title }]);
     });
   };
 
@@ -85,11 +81,11 @@ class SearchField extends Component {
   };
 
   moreGIFS = () => {
-    this.props.changeGifNum(3);
+    this.props.changeGifNum(+2);
   };
 
   lessGIFS = () => {
-    this.props.changeGifNum(-3);
+    this.props.changeGifNum(-2);
   };
 
   searchInputChanged(e) {
@@ -105,10 +101,13 @@ class SearchField extends Component {
           <input
             name='inputvalue'
             type='text'
-            placeholder=' type your search'
+            placeholder=' Type your search'
             value={this.state.inputvalue}
             onChange={this.searchInputChanged}
             id='searchInput'
+            onKeyPress={(e) => {
+              if (e.key === 'Enter') this.searchGIFS();
+            }}
           />
           <button onClick={this.searchGIFS} id='searchButton'>
             <span>Search</span>
@@ -129,23 +128,6 @@ class SearchField extends Component {
             </div>
           </div>
         </div>
-
-        {/* <div class='grid-container'>
-          {this.state.gifs.map((item, index) =>
-            index < this.state.numberGif ? (
-              <div>
-                {' '}
-                <GifGard
-                  key={index}
-                  src={item.images['original'].url}
-                  title={item.title}
-                />{' '}
-              </div>
-            ) : (
-              ''
-            )
-          )}
-        </div> */}
       </div>
     );
   }

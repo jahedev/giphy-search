@@ -1,6 +1,10 @@
 # Assignment 7 - GIPHY API SEARCH
+## Team Members
+Thierno Souleymane Diallo, Junior Hernandez, Yeuk Sing Chan, Mohammed J. Hossain
 
-### Team Members: Thierno Souleymane Diallo, Junior Hernandez, Yeuk Sing Chan, Mohammed J. Hossain
+### View Project Here
+https://jahedev.github.io/assignment-7/
+
 
 # Coding Exercise
 

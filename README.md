@@ -1,9 +1,9 @@
-# Assignment 7 - GIPHY API SEARCH
+# GIPHY API SEARCH - TTP Project 7
 ## Team Members
 Thierno Souleymane Diallo, Junior Hernandez, Yeuk Sing Chan, Mohammed J. Hossain
 
 ### View Project Here
-https://jahedev.github.io/assignment-7/
+https://jahedev.github.io/giphy-search
 
 
 # Coding Exercise
